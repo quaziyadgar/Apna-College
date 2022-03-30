@@ -2,6 +2,7 @@ import React from 'react'
 
 export default function Product(props) {
   return (
+      <>
     <div className='row'>
         <div className='col-6'>
             <h2>{props.product.name}
@@ -19,5 +20,6 @@ export default function Product(props) {
             {props.product.quantity * props.product.price}
         </div>
     </div>
+    </>
   )
 }
