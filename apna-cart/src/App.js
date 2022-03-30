@@ -15,22 +15,28 @@ function App() {
       name : "IPhone 10s Max",
       quantity : 5,
     }
-  ];
+  ]
 
-  let [productList, setProductList] = useState(products);
+   let [productlist, setProductList] = useState(productList);
 
-  incrementQuantity =(index)=>
+  const incrementQuantity =(index)=>
   {
     let newProductList = [...productList];
     newProductList[index].quantity++;
     setProductList(newProductList);
   }
-
+  const decrementQuantity =(index)=>
+  {
+    let newProductList = [...productList];
+    if(newProductList[index].quantity>0)
+    newProductList[index].quantity--;
+    setProductList(newProductList);
+  }
   return (
     <>
     <Navbar />
     <main className='container mt-5'></main>
-    <ProductList productList = {productList} incrementQuantity={this.incrementQuantity}/>
+    <ProductList productList = {productList} incrementQuantity={incrementQuantity} decrementQuantity={decrementQuantity}/>
     </>
   );
 }
