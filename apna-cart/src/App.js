@@ -55,12 +55,31 @@ function App() {
     setTotalAmount(newtotalAmount);
     setProductList(newProductList);
   }
+  const resetProduct=()=>
+  {
+    //console.log("reset");
+    let newProductList = [...list];
+    newProductList.map((product)=>{
+      product.quantity = 0;
+    });
+    setProductList(list);
+    setTotalAmount(0);
+  }
+  const removeItem = (index) =>{
+    console.log("remove called")
+    let newProductList = [...list];
+    let newtotalAmount = totalAmount;
+    newtotalAmount -= newProductList[index].quantity * newProductList[index].price;
+    newProductList.splice(index,1);
+    setProductList(newProductList);
+    setTotalAmount(newtotalAmount);
+  }
   return (
     <>
     <Navbar />
     <main className='container mt-5'></main>
-    <ProductList productList = {list} incrementQuantity={incrementQuantity} decrementQuantity={decrementQuantity}/>
-    <Footer totalAmount={totalAmount}/>
+    <ProductList productList = {list} incrementQuantity={incrementQuantity} decrementQuantity={decrementQuantity} removeItem ={removeItem}/>
+    <Footer totalAmount={totalAmount} resetProduct={resetProduct}/>
     </>
   );
 }
