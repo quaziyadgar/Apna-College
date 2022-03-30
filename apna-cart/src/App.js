@@ -29,28 +29,38 @@ function App() {
   ]
 
    let [list, setProductList] = useState(productList);
-
+   let [totalAmount, setTotalAmount] = useState(0);
   const incrementQuantity =(index)=>
   {
-    console.log(index);
+    //console.log(index);
+    //console.log(list);
     let newProductList = [...list];
-    console.log(newProductList);
+    let newtotalAmount = totalAmount;
     newProductList[index].quantity++;
+    //console.log(newProductList);
     setProductList(newProductList);
+    newtotalAmount += newProductList[index].price;
+    setTotalAmount(newtotalAmount);
+    //console.log(productList);
   }
   const decrementQuantity =(index)=>
   {
     let newProductList = [...list];
+    let newtotalAmount = totalAmount;
     if(newProductList[index].quantity>0)
-    newProductList[index].quantity--;
+    {
+      newProductList[index].quantity--;
+      newtotalAmount -= newProductList[index].price;
+    }
+    setTotalAmount(newtotalAmount);
     setProductList(newProductList);
   }
   return (
     <>
     <Navbar />
     <main className='container mt-5'></main>
-    <ProductList productList = {productList} incrementQuantity={incrementQuantity} decrementQuantity={decrementQuantity}/>
-    <Footer/>
+    <ProductList productList = {list} incrementQuantity={incrementQuantity} decrementQuantity={decrementQuantity}/>
+    <Footer totalAmount={totalAmount}/>
     </>
   );
 }
